@@ -11,7 +11,7 @@ export default function Home() {
   const [notification, setNotification] = useState<{ message: string; type: 'error' | 'success' | 'info' } | null>(null);  // notification message
   const [loading, setLoading] = useState(false);
   const [prompt, setPrompt] = useState('');
-  const [stickerUrl, setStickerUrl] = useState("https://oaidalleapiprodscus.blob.core.windows.net/private/org-Xq033khHTeOpO6UYr7LQVHXt/user-eHusOdxScf97cy6BrosQ9mE5/img-gbDUBHcHIwK2gVyEwiOXhvvi.png?st=2024-10-25T14%3A33%3A49Z&se=2024-10-25T16%3A33%3A49Z&sp=r&sv=2024-08-04&sr=b&rscd=inline&rsct=image/png&skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-10-24T18%3A43%3A43Z&ske=2024-10-25T18%3A43%3A43Z&sks=b&skv=2024-08-04&sig=ZKQfIQul7Url/qAJdkXmhK7/MgSmNT/lS60z7cEbzCQ%3D");
+  const [stickerUrl, setStickerUrl] = useState("");
 
   const loader = () => (
     <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
