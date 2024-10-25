@@ -1,17 +1,18 @@
 'use client';
 
 import Image from "next/image";
-import { useState } from 'react';
-import { faArrowUp, faDownload, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { useEffect, useState } from 'react';
+import { faDownload, faImage, faPlus, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Notification from './utils/notify';
+import Notification from '../utils/notify';
 import { Analytics } from "@vercel/analytics/react"
 
 export default function Home() {
   const [notification, setNotification] = useState<{ message: string; type: 'error' | 'success' | 'info' } | null>(null);  // notification message
   const [loading, setLoading] = useState(false);
   const [prompt, setPrompt] = useState('');
-  const [stickerUrl, setStickerUrl] = useState("https://oaidalleapiprodscus.blob.core.windows.net/private/org-Xq033khHTeOpO6UYr7LQVHXt/user-eHusOdxScf97cy6BrosQ9mE5/img-gbDUBHcHIwK2gVyEwiOXhvvi.png?st=2024-10-25T14%3A33%3A49Z&se=2024-10-25T16%3A33%3A49Z&sp=r&sv=2024-08-04&sr=b&rscd=inline&rsct=image/png&skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-10-24T18%3A43%3A43Z&ske=2024-10-25T18%3A43%3A43Z&sks=b&skv=2024-08-04&sig=ZKQfIQul7Url/qAJdkXmhK7/MgSmNT/lS60z7cEbzCQ%3D");
+  const [uploadedImage, setUploadedImage] = useState("");
+  const [stickerUrl, setStickerUrl] = useState("");
 
   const loader = () => (
     <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
@@ -91,7 +92,6 @@ export default function Home() {
           }
 
           setStickerUrl(sticker);
-          console.log('Sticker URL:', sticker);
           setNotification({ message: 'Cute sticker generated successfully!', type: 'success' });
 
         } catch (error) {
@@ -102,20 +102,27 @@ export default function Home() {
         }
     };
 
-    const handleDownload = () => {
-      if (!stickerUrl) return;
+    const openUserMedia = async () => {
+      // Open user file folder to allow the user to select one image
+      const fileInput = document.createElement('input');
+      fileInput.type = 'file';
+      fileInput.accept = 'image/*';
+      fileInput.click();
   
-      const link = document.createElement('a');
-      link.href = stickerUrl;
-      link.download = 'cute-sticker.png'; // You can set a default filename
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      fileInput.onchange = async (e) => {
+        const file = (e.target as HTMLInputElement).files?.[0];
+        if (!file) return;
+  
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+          setUploadedImage(reader.result as string);
+        };
+      };
     };
-  
-    const handleClose = () => {
-      setStickerUrl("");
-      setPrompt("");
+
+    const removeUploadedImage = () => {
+      setUploadedImage("");
     };
 
     return (
@@ -131,12 +138,38 @@ export default function Home() {
             <div className="mb-6 inline-flex justify-center text-2xl font-semibold leading-9">
                 <h1>Let's Generate Cutesy AI Sticker!</h1>
             </div>
+
+            {/* Display Uploaded Image */}
+            {uploadedImage && (
+              <div className="mb-4 flex items-center justify-center relative">
+                <img
+                  src={uploadedImage}
+                  alt="Uploaded"
+                  className="w-20 h-20 rounded-md object-cover"
+                />
+                <button
+                  onClick={removeUploadedImage}
+                  className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full px-2 hover:bg-red-600 focus:outline-none"
+                >
+                  <FontAwesomeIcon icon={faTimes} />
+                </button>
+              </div>
+            )}
             <div className="lg:w-[60%] w-full mx-auto flex items-center p-2 mb-8 shadow-lg gap-4 bg-[#2e2e2e] rounded-full">
+                <button
+                    disabled={loading}
+                    onClick={openUserMedia}
+                    className={`flex items-center justify-center w-12 h-10 rounded-full shadow cursor-pointer bg-[#aeaeae] text-black`}>
+                    {!loading 
+                        ? <FontAwesomeIcon icon={faImage} />
+                        : <span className='flex justify-center items-center text-black text-xl'>{loader()}</span>
+                    }
+                </button>
                 <input
                     type="text"
                     value={prompt}
                     onChange={(e) => setPrompt(e.target.value)}
-                    placeholder="A girl with short pink hair wearing a oversize hoodie..."
+                    placeholder="Enter loom video URL here..."
                     className="placeholder:text-[#aeaeae] bg-transparent focus:outline-none text-white outline-none w-full px-4" 
                     disabled={loading}
                 />
@@ -144,47 +177,14 @@ export default function Home() {
                     disabled={prompt === '' || loading}
                     onClick={generateSticker}
                     className={`flex items-center justify-center w-12 h-10 rounded-full shadow ${
-                      prompt === '' ? 'cursor-not-allowed bg-[#4e4e4e] text-black' : 'cursor-pointer bg-[#eeeeee] text-black'}`}
+                      prompt === '' ? 'cursor-not-allowed bg-[#4e4e4e] text-black'  : 'cursor-pointer bg-[#eeeeee] text-black'}`}
                     >
                     {!loading 
-                        ? <FontAwesomeIcon icon={faArrowUp} />
+                        ? <FontAwesomeIcon icon={faDownload} />
                         : <span className='flex justify-center items-center text-black text-xl'>{loader()}</span>
                     }
                 </button>
             </div>
-            {/* Modal */}
-            {stickerUrl && (
-              <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-                <div className="bg-[#2e2e2e] rounded-md p-4 relative w-11/12 max-w-md">
-                  {/* Download Button */}
-                  <button
-                    onClick={handleDownload}
-                    className="absolute top-4 right-4 flex items-center justify-center w-8 h-8 bg-[#4e4e4e] rounded-full hover:bg-[#5e5e5e] transition"
-                    title="Download"
-                  >
-                    <FontAwesomeIcon icon={faDownload} className="text-white" />
-                  </button>
-                  {/* Close Button */}
-                  <button
-                    onClick={handleClose}
-                    className="absolute top-4 left-4 flex items-center justify-center w-8 h-8 bg-[#4e4e4e] rounded-full hover:bg-[#5e5e5e] transition"
-                    title="Close"
-                  >
-                    <FontAwesomeIcon icon={faTimes} className="text-white" />
-                  </button>
-                  {/* Sticker Image */}
-                  <div className="flex justify-center items-center">
-                    <Image 
-                      src={stickerUrl} 
-                      alt="Generated Sticker" 
-                      width={300} 
-                      height={300} 
-                      className="rounded-md" 
-                    />
-                  </div>
-                </div>
-              </div>
-            )}
         </div>
     );
 }
