@@ -131,3 +131,99 @@ export async function POST(request: Request) {
         return NextResponse.json({ error: "An error occurred while processing your request." }, { status: 500 });
     }
 }
+
+
+
+curl -L \
+  -X POST \
+  -H 'Content-Type: application/json' \
+  -H 'Authorization: Bearer ' \
+  'https://api.aimlapi.com/images/generations' \
+  -d '{
+    "provider": "openai",
+    "prompt": "A cute panda eating ice cream under a rainbow",
+    "model": "dall-e-3",
+    "n": 1,
+    "quality": "hd",
+    "response_format": "url",
+    "size": "1024x1024",
+    "style": "vivid"
+  }'
+
+curl -L \
+  -X POST \
+  -H 'Content-Type: application/json' \
+  -H 'Authorization: Bearer ' \
+  'https://api.aimlapi.com/chat/completions' \
+  -d '{
+    "model": "gpt-4o-mini",
+    "messages":[
+        {
+            "role": "system",
+            "content": "You are a helpful assistant."
+        },
+        {
+            "role": "user",
+            "content": "What is the capital of the United States?"
+        }
+    ]
+    }'
+
+
+
+curl -L \
+  -X POST \
+  -H 'Content-Type: application/json' \
+  -H 'Authorization: Bearer ' \
+  'https://api.aimlapi.com/images/generations' \
+  -d '{
+    "provider": "openai",
+    "prompt": "A cute panda eating ice cream under a rainbow",
+    "model": "dall-e-2",
+    "n": 1,
+    "size": "256x256",
+  }'
+
+-------
+
+fetch request for the chat completion API:
+fetch('https://api.aimlapi.com/chat/completions', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer '
+  },
+  body: JSON.stringify({
+    model: 'gpt-4o-mini',
+    messages: [
+      {
+        role: 'system',
+        content: 'You are a helpful assistant.'
+      },
+      {
+        role: 'user',
+        content: 'What is the capital of the United States?'
+      }
+    ]
+  })
+})
+
+
+fetch request for the image generation API:
+
+fetch('https://api.aimlapi.com/images/generations', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    provider: 'openai',
+    prompt: 'A cute panda eating ice cream under a rainbow',
+    model: 'dall-e-3',
+    n: 1,
+    quality: 'hd',
+    response_format: 'url',
+    size: '1024x1024',
+    style: 'vivid'
+  })
+})
