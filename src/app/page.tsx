@@ -129,7 +129,7 @@ export default function Home() {
                 />
             )}
             <div className="mb-6 inline-flex justify-center text-2xl font-semibold leading-9">
-                <h1>Let's Generate Cutesy AI Sticker!</h1>
+                <h1>Let&spos;s Generate Cutesy AI Sticker!</h1>
             </div>
             <div className="lg:w-[60%] w-full mx-auto flex items-center p-2 mb-8 shadow-lg gap-4 bg-[#2e2e2e] rounded-full">
                 <input

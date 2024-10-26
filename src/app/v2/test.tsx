@@ -136,17 +136,17 @@ export default function Home() {
                 />
             )}
             <div className="mb-6 inline-flex justify-center text-2xl font-semibold leading-9">
-                <h1>Let's Generate Cutesy AI Sticker!</h1>
+                <h1>Let&apos;s Generate Cutesy AI Sticker!</h1>
             </div>
 
             {/* Display Uploaded Image */}
             {uploadedImage && (
               <div className="mb-4 flex items-center justify-center relative">
-                <img
+                {/* <img
                   src={uploadedImage}
                   alt="Uploaded"
                   className="w-20 h-20 rounded-md object-cover"
-                />
+                /> */}
                 <button
                   onClick={removeUploadedImage}
                   className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full px-2 hover:bg-red-600 focus:outline-none"
