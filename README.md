@@ -153,27 +153,26 @@ export async function POST(request: Request) {
         console.log("/api/enhancePrompt/route.ts userPrompt: ", userPrompt);
 
         // Make the API call to the external service
-        const response = await fetch("https://api.openai.com/v1/chat/completions", {
-            method: "POST",
+          const response = await fetch('https://api.aimlapi.com/chat/completions', {
+            method: 'POST',
             headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${process.env.NEXT_PUBLIC_OPENAI_API_KEY}`
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${process.env.NEXT_PUBLIC_AIML_API_KEY}`
             },
             body: JSON.stringify({
-                model: "gpt-4o",
-                messages: [
-                    {
-                        role: "system",
-                        content: systemPrompt,
-                    },
-                    {
-                        role: "user",
-                        content: userPrompt,
-                    },
-                ],
-                max_tokens: 512,
-            }),
-        });
+              model: 'gpt-4o-mini',
+              messages: [
+                {
+                  role: 'system',
+                  content: systemPrompt
+                },
+                {
+                  role: 'user',
+                  content: userPrompt
+                }
+              ]
+            })
+          });
 
         console.log("response: ", response);
 
@@ -201,7 +200,7 @@ export async function POST(request: Request) {
 - **Importing `NextResponse`**: To handle our HTTP responses smoothly.
 - **Defining the `POST` function**: This is where the magic happens when someone hits this endpoint.
 - **Fetching the `userPrompt`**: We're grabbing the prompt the user provided.
-- **Calling OpenAI's API**: We're making a request to enhance the user's prompt using GPT-4o.
+- **Calling AI/ML API's API**: We're making a request to enhance the user's prompt using GPT-4o.
 - **Handling Responses**: We check if the response is okay, parse the data, and extract the assistant's response.
 - **Error Handling**: Because nobody likes unhandled errors ruining the party.
 
@@ -232,18 +231,22 @@ export async function POST(request: Request) {
         console.log("/api/generateSticker/route.ts userPrompt: ", userPrompt);
 
         // Make the API call to the external service
-        const response = await fetch('https://api.openai.com/v1/images/generations', {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${process.env.NEXT_PUBLIC_OPENAI_API_KEY}`
-            },
-            body: JSON.stringify({
-                model: 'dall-e-3', // Ensure this is the correct model name
-                prompt: userPrompt,
-                n: 1, // Number of images to generate
-                size: '1024x1024', // Image size
-            }),
+        const response = await fetch('https://api.aimlapi.com/images/generations', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${process.env.NEXT_PUBLIC_AIML_API_KEY}`
+          },
+          body: JSON.stringify({
+            provider: 'openai',
+            prompt: userPrompt,
+            model: 'dall-e-3',
+            n: 1,
+            quality: 'hd',
+            response_format: 'url',
+            size: '1024x1024',
+            style: 'vivid'
+          })
         });
 
         console.log("response: ", response);
@@ -274,7 +277,7 @@ export async function POST(request: Request) {
 - **Importing `NextResponse`**: To handle our HTTP responses smoothly.
 - **Defining the `POST` function**: This is where the magic happens when someone hits this endpoint.
 - **Fetching the `userPrompt`**: We're grabbing the prompt the user provided.
-- **Calling OpenAI's API**: We're making a request to generate an image based on the prompt using DALL·E 3. 
+- **Calling AI/ML API's API**: We're making a request to generate an image based on the prompt using DALL·E 3. 
 - **Handling Responses**: We check if the response is okay, parse the data, and extract the image URL.
 - **Error Handling**: Because nobody likes unhandled errors ruining the party.
 
@@ -637,10 +640,10 @@ Now, before you excitedly run your app and wonder why it's not working, let's se
 Create a file called **`.env.local`** in the root of your project and add:
 
 ```
-NEXT_PUBLIC_OPENAI_API_KEY=your_openai_api_key_here
+NEXT_PUBLIC_AIML_API_KEY=your_api_key_here
 ```
 
-Replace **`your_openai_api_key_here`** with your actual AI/ML API key. If you don't have one, you might need to sign up at [AI/ML API](https://aimlapi.com/?via=ibrohim) and grab it. It's absolutely **FREE** to get started!
+Replace **`your_api_key_here`** with your actual AI/ML API key. If you don't have one, you might need to sign up at [AI/ML API](https://aimlapi.com/?via=ibrohim) and grab it. It's absolutely **FREE** to get started!
 
 Here's a Quick Tutorial on how to get your API key: [How to get API Key from AI/ML API. Quick step-by-step tutorial with screenshots for better understanding.](https://medium.com/@abdibrokhim/how-to-get-api-key-from-ai-ml-api-225a69d0bb25)
 
