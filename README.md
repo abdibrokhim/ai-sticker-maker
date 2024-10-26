@@ -32,9 +32,9 @@ AI/ML API is a game-changing platform for developers and SaaS entrepreneurs look
 - **Developer-Friendly Integration**: RESTful APIs and SDKs for seamless incorporation into your stack. 🛠️
 - **Serverless Architecture**: Focus on coding, not infrastructure management. ☁️
 
-Get Started for **FREE** ($0 US dollars): [aimlapi.com](https://aimlapi.com/) 🆓
+Get Started for **FREE** ($0 US dollars): [aimlapi.com](https://aimlapi.com/?via=ibrohim) 🆓
 
-Deep Dive into AI/ML API Documentation (very detailed, can't agree more): [docs.aimlapi.com](https://docs.aimlapi.com/) 📖
+Deep Dive into AI/ML API Documentation (very detailed, can't agree more): [docs.aimlapi.com](https://docs.aimlapi.com/?via=ibrohim) 📖
 
 ### Tech Stack Ingredients 🥘
 
@@ -632,7 +632,7 @@ Because Next.js is a bit overprotective (like a helicopter parent) and won't loa
 
 Now, before you excitedly run your app and wonder why it's not working, let's set up our environment variables.
 
-### Setting Up Your OpenAI API Key 🗝️
+### Setting Up Your AI/ML API Key 🗝️
 
 Create a file called **`.env.local`** in the root of your project and add:
 
@@ -640,7 +640,9 @@ Create a file called **`.env.local`** in the root of your project and add:
 NEXT_PUBLIC_OPENAI_API_KEY=your_openai_api_key_here
 ```
 
-Replace **`your_openai_api_key_here`** with your actual OpenAI API key. If you don't have one, you might need to sign up at [OpenAI](https://openai.com/) and grab it.
+Replace **`your_openai_api_key_here`** with your actual AI/ML API key. If you don't have one, you might need to sign up at [AI/ML API](https://aimlapi.com/?via=ibrohim) and grab it. It's absolutely **FREE** to get started!
+
+Here's a Quick Tutorial on how to get your API key: [How to get API Key from AI/ML API. Quick step-by-step tutorial with screenshots for better understanding.](https://medium.com/@abdibrokhim/how-to-get-api-key-from-ai-ml-api-225a69d0bb25)
 
 > **Warning**: Keep this key secret! Don't share it publicly or commit it to Git. Treat it like your Netflix password.
 
@@ -698,5 +700,9 @@ Remember, the world is your oyster (or sticker). Keep experimenting, keep buildi
 Happy coding! 🎉
 
 Full implementation available on Github [AI Sticker Maker](https://github.com/abdibrokhim/ai-sticker-maker).
+
+It’s Absolutely FREE to get started! [Try It Now click](https://aimlapi.com/?via=ibrohim)
+
+Also check out this tutorial, it's very interesting! [Building a Chrome Extension from Scratch with AI/ML API, Deepgram Aura, and IndexedDB Integration](https://medium.com/@abdibrokhim/building-a-chrome-extension-from-scratch-with-ai-ml-api-deepgram-aura-and-indexeddb-integration-2e5d1e6fbfb0)
 
 Should you have any questions or need further assistance, don’t hesitate to reach out via email at `abdibrokhim@gmail.com`.
