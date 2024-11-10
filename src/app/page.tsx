@@ -12,7 +12,7 @@ export default function Home() {
   const [notification, setNotification] = useState<{ message: string; type: 'error' | 'success' | 'info' } | null>(null);  // notification message
   const [loading, setLoading] = useState(false);
   const [prompt, setPrompt] = useState('');
-  const [stickerUrl, setStickerUrl] = useState("https://oaidalleapiprodscus.blob.core.windows.net/private/org-Eo1U9k4AbSJPoV7seW2PDq2d/user-oGBnQp1igcXKlzRsuv3QKfH3/img-lendlFIevdwPjmKSPdcL7E1U.png?st=2024-11-10T13%3A31%3A39Z&se=2024-11-10T15%3A31%3A39Z&sp=r&sv=2024-08-04&sr=b&rscd=inline&rsct=image/png&skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-11-09T23%3A55%3A48Z&ske=2024-11-10T23%3A55%3A48Z&sks=b&skv=2024-08-04&sig=8ohAmF4r8M3uwDoWHlkt0739qNBq0uFjwtgXOgaWuW8%3D");
+  const [stickerUrl, setStickerUrl] = useState("");
 
   // list of stickers 
   const listOfStickers = [
