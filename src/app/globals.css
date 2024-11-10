@@ -29,3 +29,9 @@ body {
 .nodrag {
   pointer-events: none;      /* Prevents mouse events on the image */
 }
+
+.bg_style {
+  background-image: radial-gradient(var(--foreground) 1px, transparent 0);
+  background-size: 1.875rem 1.875rem;
+  background-position: center -0.9375rem;
+}

@@ -1,8 +1,9 @@
 'use client';
 
 import Image from "next/image";
-import { useState } from 'react';
-import { faArrowUp, faDownload, faTimes } from '@fortawesome/free-solid-svg-icons';
+import React, { useState, useEffect } from 'react';
+import { useUser, SignInButton, SignedIn, UserButton } from '@clerk/nextjs';
+import { faArrowRight, faArrowUp, faDownload, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Notification from './utils/notify';
 import { Analytics } from "@vercel/analytics/react"
@@ -13,6 +14,7 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [prompt, setPrompt] = useState('');
   const [stickerUrl, setStickerUrl] = useState("");
+  const { isSignedIn } = useUser();
 
   // list of stickers 
   const listOfStickers = [
@@ -159,6 +161,16 @@ export default function Home() {
     return (
         <div className="flex flex-col items-center justify-center min-h-screen text-white p-4 bg-[#212121e6] noselect">
             <Analytics />
+            <div className="absolute top-4 right-8">
+        {!isSignedIn ? (
+          <SignInButton>
+            <button className="bg-foreground text-gray-100 px-4 py-2 rounded-md dark:bg-background dark:text-gray-900">Sign In</button>
+          </SignInButton> ) 
+          : (<SignedIn>
+              <UserButton />
+            </SignedIn>)
+        }
+      </div> 
             {notification && (
                 <Notification
                     message={notification.message}
@@ -166,36 +178,16 @@ export default function Home() {
                     onClose={() => setNotification(null)}
                 />
             )}
-            <div className="flex flex-col sm:flex-row space-x-0 sm:space-x-4 space-y-4 sm:space-y-0 p-4 absolute sm:top-[100px] top-[20px]">
-                <div className="flex items-center bg-orange-500 text-white p-3 rounded-lg shadow-lg hover:bg-orange-600">
-                    <span className="mr-2 text-lg">🚀</span>
-                    <span>
-                    One API 200+, AI Models, Uptime 99.99%. 
-                    <a href="https://aimlapi.com/?via=ibrohim" target="_blank" className="underline hover:text-yellow-300 hover:font-black">
-                        Try it now
-                    </a>
-                    </span>
-                </div>
-                
-                <div className="flex items-center bg-blue-500 text-white p-3 rounded-lg shadow-lg hover:bg-blue-600">
-                    <span className="mr-2 text-lg">🤖</span>
-                    <span>
-                    HumanAIze AI text with the smartest AI humanizer. 
-                    <a href="https://humanaize.vercel.app/" target="_blank" className="underline hover:text-yellow-300 hover:font-black">
-                        Humanize AI-shitt
-                    </a>
-                    </span>
-                </div>
-                
-                <div className="flex items-center bg-green-500 text-white p-3 rounded-lg shadow-lg hover:bg-green-600">
-                    <span className="mr-2 text-lg">🤖</span>
-                    <span>
-                    Book a Meeting with #1 Cooker. 
-                    <a href="https://imcook.in" target="_blank" className="underline hover:text-yellow-300 hover:font-black">
-                        Let&apos;s cook
-                    </a>
-                    </span>
-                </div>
+            <div className="flex flex-col sm:flex-row space-x-0 sm:space-x-4 space-y-4 sm:space-y-0 p-4 absolute sm:top-[100px] top-[60px]">
+              <div className="flex items-center bg-orange-600 text-white p-3 rounded-lg shadow-lg hover:bg-orange-500">
+                  <span className="mr-2 text-lg">🚀</span>
+                  <span>
+                  One API 200+, AI Models, Uptime 99.99%. 
+                  <a href="https://aimlapi.com/?via=ibrohim" target="_blank" className="ml-2 text-black hover:font-black bg-[#eeeeee] hover:bg-[#ffffff] text-md font-black p-2 rounded-md">
+                      Try for FREE <FontAwesomeIcon icon={faArrowRight} />
+                  </a>
+                  </span>
+              </div>
             </div>
             <div className="mb-6 inline-flex mt-64 items-center justify-center text-2xl font-semibold leading-9">
                 <h1>{`Let's Generate AI Sticker!`}</h1>
@@ -268,6 +260,47 @@ export default function Home() {
                 custom-font-weight="500"
                 custom-width="200px"
             ></script>
+            <div className='mt-16'>
+                <p className="text-lg p-16 text-center">You may also like...</p>
+                <div className='flex flex-col md:flex-row gap-4'>
+                    <div className='flex flex-row gap-4 items-center justify-center p-4 bg-green-700 hover:bg-green-600 rounded-md shadow-lg'>
+                        <div className='flex flex-col gap-4'>
+                            <p className='text-lg font-bold'>AI Text Humanizer 🤖</p>
+                            <button onClick={() => {
+                                window.open('https://humanaize.vercel.app/', '_blank');
+                            }} className='bg-[#eeeeee] hover:bg-[#ffffff] text-black text-md font-black p-2 rounded-md'>Try for FREE <FontAwesomeIcon icon={faArrowRight} /></button>
+                        </div>
+                        <a href='https://humanaize.vercel.app/' target='_blank'>
+                            <Image 
+                                src="/results_1.png"
+                                alt="AI Text Humanizer" 
+                                objectFit="cover"
+                                width={300} 
+                                height={300} 
+                                className="rounded-md nodrag" 
+                                />
+                        </a>
+                    </div>
+                    <div className='flex flex-row gap-4 items-center justify-center p-4 bg-blue-700 hover:bg-blue-600 rounded-md shadow-lg'>
+                        <div className='flex flex-col gap-4'>
+                            <p className='text-lg font-bold'>Loom Video Downloader 🙈</p>
+                            <button onClick={() => {
+                                window.open('https://lovido.lol', '_blank');
+                            }} className='bg-[#eeeeee] hover:bg-[#ffffff] text-black text-md font-black p-2 rounded-md'>Try for FREE <FontAwesomeIcon icon={faArrowRight} /></button>
+                        </div>
+                        <a href='https://lovido.lol' target='_blank'>
+                            <Image 
+                                src="/loomdl.png"
+                                alt="Loom Video Downloader" 
+                                objectFit="cover"
+                                width={300} 
+                                height={300} 
+                                className="rounded-md nodrag" 
+                                />
+                        </a>
+                    </div>
+                </div>
+            </div>
             {/* generated stickers gallery */}
             <div>
               <p className="text-lg p-16 text-center">Generated by people</p>
