@@ -1,16 +1,17 @@
 import { NextResponse } from 'next/server';
 
+// test prompt: A girl with short black and pink hair wearing a oversize shirt and cutesy glasses.
 export async function POST(request: Request) {
     try {
         const { userPrompt } = await request.json();
         console.log("/api/generateSticker/route.ts userPrompt: ", userPrompt);
 
         // Make the API call to the external service
-        const response = await fetch('https://api.openai.com/v1/images/generations', {
+        const response = await fetch('https://api.aimlapi.com/images/generations', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${process.env.NEXT_PUBLIC_OPENAI_API_KEY}`
+                "Authorization": `Bearer ${process.env.NEXT_PUBLIC_AIML_API_KEY}`
             },
             body: JSON.stringify({
                 model: 'dall-e-3', // Ensure this is the correct model name

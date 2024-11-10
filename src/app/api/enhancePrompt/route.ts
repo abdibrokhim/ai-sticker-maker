@@ -48,11 +48,11 @@ export async function POST(request: Request) {
         console.log("/api/enhancePrompt/route.ts userPrompt: ", userPrompt);
 
         // Make the API call to the external service
-        const response = await fetch("https://api.openai.com/v1/chat/completions", {
+        const response = await fetch("https://api.aimlapi.com/chat/completions", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${process.env.NEXT_PUBLIC_OPENAI_API_KEY}`
+                "Authorization": `Bearer ${process.env.NEXT_PUBLIC_AIML_API_KEY}`
             },
             body: JSON.stringify({
                 model: "gpt-4o",

@@ -285,7 +285,7 @@ Let's try above prompt with `panda` in action! 🚀
 
 #### Here's our cutesy panda sticker! 🐼🍦🌈
 
-![Cute Panda Eating Ice Cream Under a Rainbow](./generated_stickers/img-NdDGjDeEqR6LevFVwCf4U1t1.png)
+![Cute Panda Eating Ice Cream Under a Rainbow](./public/generated_stickers/img-NdDGjDeEqR6LevFVwCf4U1t1.png)
 
 Other examples 😍
 
@@ -294,7 +294,7 @@ Prompt:
 A girl with short white+grey hair wearing a oversize shirt
 ```
 
-![A girl with short white+grey hair wearing a oversize shirt](./generated_stickers/img-gbDUBHcHIwK2gVyEwiOXhvvi.png)
+![A girl with short white+grey hair wearing a oversize shirt](./public/generated_stickers/img-gbDUBHcHIwK2gVyEwiOXhvvi.png)
 
 
 Prompt: 
@@ -302,7 +302,7 @@ Prompt:
 A girl with short black+pink hair wearing a oversize pink shirt
 ```
 
-![A girl with short black+pink hair wearing a oversize pink shirt](./generated_stickers/img-lo0k25GLYpcYz4f4aXsm73MS.png)
+![A girl with short black+pink hair wearing a oversize pink shirt](./public/generated_stickers/img-lo0k25GLYpcYz4f4aXsm73MS.png)
 
 Seems, like really WOW! 🤩
 
