@@ -1,4 +1,4 @@
-# HumanAIze
+# AI Sticker Maker
 
 <div align="center" style="padding: 10px; border: 1px solid #ccc; background-color: #f9f9f9; border-radius: 10px; margin-bottom: 20px;">
     <h2 style="margin: 0; font-size: 24px; color: #333;">AI Sticker Maker is OUT! 😍</h2>
