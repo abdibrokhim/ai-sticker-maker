@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Notification from './utils/notify';
 import { Analytics } from "@vercel/analytics/react"
 import Footer from './utils/footer';
+import OverlayCard from './utils/overlaycard';
 
 export default function Home() {
   const [notification, setNotification] = useState<{ message: string; type: 'error' | 'success' | 'info' } | null>(null);  // notification message
@@ -161,6 +162,7 @@ export default function Home() {
     return (
         <div className="flex flex-col items-center justify-center min-h-screen text-white p-4 bg-[#212121e6] noselect">
             <Analytics />
+            <OverlayCard />
             <div className="absolute top-4 right-8">
         {!isSignedIn ? (
           <SignInButton>
